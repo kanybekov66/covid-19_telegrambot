@@ -8,7 +8,8 @@ covid19 = COVID19Py.COVID19()
 
 # def get_top_by_infections(country_amount):
 
-data = covid19.getLocationByCountryCode("KG")
+# data = covid19.getLocationByCountryCode("KG")
+data = covid19.getAll()
 print(data) # all info
-print(data[0]['latest']['confirmed']) #confirmed
-print(data[0]['latest']['deaths']) #deaths
+print(data['latest']['confirmed']) #confirmed
+print(data['latest']['deaths']) #deaths

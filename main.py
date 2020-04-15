@@ -15,21 +15,28 @@ def start(message):
     send_message = f"Привет {message.from_user.first_name}!"
     bot.send_message(message.chat.id, send_message, parse_mode='html', reply_markup=markup)
 
+# TEMPLATES
+confirmed_text = 'Подтвержденные случаи: '
+deaths_text = 'Летальные исходы: '
+
 # Функция, что сработает при отправке какого-либо текста боту
 # Здесь мы создаем отслеживания данных и вывод статистики по определенной стране
-data = covid19.getLocationByCountryCode("KG")
-# print(data) # all info
-confirmed = data[0]['latest']['confirmed']
-deaths = data[0]['latest']['deaths']
+data_kg = covid19.getLocationByCountryCode("KG")
+confirmed_kg = data_kg[0]['latest']['confirmed']
+deaths_kg = data_kg[0]['latest']['deaths']
+
+data_world = covid19.getAll()
+confirmed_world = data_world['latest']['confirmed']
+deaths_world = data_world['latest']['deaths']
 
 @bot.message_handler(content_types=['text'])
 def mess(message):
     if message.text == 'Кыргызстан':
-
-        bot.send_message(message.from_user.id, 'Подтвержденные случаи: ' + str(confirmed))
-        bot.send_message(message.from_user.id, 'Летальные исходы: ' + str(deaths))
+        bot.send_message(message.from_user.id, confirmed_text + str(confirmed_kg))
+        bot.send_message(message.from_user.id, deaths_text + str(deaths_kg))
     else:
-        bot.send_message(message.from_user.id, 'Press the fucking button')
+        bot.send_message(message.from_user.id, confirmed_text + str(confirmed_world))
+        bot.send_message(message.from_user.id, deaths_text + str(deaths_world))
 
     # get_message_bot = message.text.strip().lower()
     # if get_message_bot == "кыргызстан":
