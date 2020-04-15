@@ -17,16 +17,17 @@ def start(message):
 
 # Функция, что сработает при отправке какого-либо текста боту
 # Здесь мы создаем отслеживания данных и вывод статистики по определенной стране
-location = covid19.getLocationByCountryCode("KG")
-info = location[0]
-info2 = info['latest']
-info3 = info2['confirmed']
+data = covid19.getLocationByCountryCode("KG")
+# print(data) # all info
+confirmed = data[0]['latest']['confirmed']
+deaths = data[0]['latest']['deaths']
 
 @bot.message_handler(content_types=['text'])
 def mess(message):
     if message.text == 'Кыргызстан':
 
-        bot.send_message(message.from_user.id, info3)
+        bot.send_message(message.from_user.id, 'Подтвержденные случаи: ' + str(confirmed))
+        bot.send_message(message.from_user.id, 'Летальные исходы: ' + str(deaths))
     else:
         bot.send_message(message.from_user.id, 'Press the fucking button')
 
