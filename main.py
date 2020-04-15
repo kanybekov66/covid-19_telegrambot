@@ -34,9 +34,11 @@ def mess(message):
     if message.text == 'Кыргызстан':
         bot.send_message(message.from_user.id, confirmed_text + str(confirmed_kg))
         bot.send_message(message.from_user.id, deaths_text + str(deaths_kg))
-    else:
+    elif message.text == 'Во всём мире':
         bot.send_message(message.from_user.id, confirmed_text + str(confirmed_world))
         bot.send_message(message.from_user.id, deaths_text + str(deaths_world))
+    else:
+        bot.send_message(message.from_user.id, '¯\_(ツ)_/¯')
 
     # get_message_bot = message.text.strip().lower()
     # if get_message_bot == "кыргызстан":
